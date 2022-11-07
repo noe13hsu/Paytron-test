@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -6,6 +6,7 @@ import classes from './DropDown.module.css';
 
 const DropDown = (props) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -16,8 +17,21 @@ const DropDown = (props) => {
     setOpen(false);
   };
 
+  const handleClickAway = (e) => {
+    if (ref.current.contains(e.target)) return;
+    setOpen(false)
+  }
+
+  useEffect(() => {
+    window.addEventListener('mousedown', handleClickAway)
+
+    return () => {
+      window.removeEventListener('mousedown', handleClickAway)
+    }
+  }, [ref])
+
   return (
-    <div className={`${classes.container} ${props.className}`} style={props.style}>
+    <div className={`${classes.container} ${props.className}`} ref={ref} style={props.style}>
       {props.label && <span>{props.label}</span>}
       <button onClick={handleOpen} className={classes.dropdown}>
         {props.leftIcon}
@@ -44,7 +58,7 @@ const DropDown = (props) => {
       {open ? (
         <ul className={classes.menu}>
           {props.options.map(({ option, key, icon }) => (
-            <li className={classes['menu-item']}>
+            <li key={key} className={classes['menu-item']}>
               <button className={classes.button} onClick={() => handleSelect(key)}>
                 {icon}
                 {option}

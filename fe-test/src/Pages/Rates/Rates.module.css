@@ -58,3 +58,12 @@
 .slow {
   transition: all 1s cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
 }
+
+.columnWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
