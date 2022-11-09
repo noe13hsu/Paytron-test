@@ -19,16 +19,16 @@ const DropDown = (props) => {
 
   const handleClickAway = (e) => {
     if (ref.current.contains(e.target)) return;
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   useEffect(() => {
-    window.addEventListener('mousedown', handleClickAway)
+    window.addEventListener('mousedown', handleClickAway);
 
     return () => {
-      window.removeEventListener('mousedown', handleClickAway)
-    }
-  }, [ref])
+      window.removeEventListener('mousedown', handleClickAway);
+    };
+  }, [ref]);
 
   return (
     <div className={`${classes.container} ${props.className}`} ref={ref} style={props.style}>

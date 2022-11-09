@@ -5,8 +5,7 @@ const AmountInput = (props) => {
         color: '#0b1a3f',
         fontFamily: 'Nunito Sans',
         maxWidth: '400px',
-        ...props.style,
-    }
+    };
 
     const inputStyle = {
         border: '1px solid #e5e5e5',
@@ -20,12 +19,14 @@ const AmountInput = (props) => {
         paddingRight: '10px',
         textAlign: 'right',
         width: '400px',
-    }
+    };
 
     return (
         <div style={containerStyle}>
             {props.label && <span>{props.label}</span>}
             <input
+                data-testid='amount-input'
+                min={0}
                 onChange={props.setValue}
                 style={inputStyle}
                 type='number'

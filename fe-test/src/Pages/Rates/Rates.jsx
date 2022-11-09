@@ -30,9 +30,9 @@ const Rates = () => {
 
   const getConversion = (isMarkupIncluded) => {
     const trueConversion = exchangeRate * amount;
-    const paytronConversion = trueConversion * (1 - MARK_UP)
+    const paytronConversion = trueConversion * (1 - MARK_UP);
     return isMarkupIncluded ? paytronConversion.toFixed(2) : trueConversion.toFixed(2);
-  }
+  };
 
   const fetchData = async () => {
     if (!loading) {
@@ -64,7 +64,7 @@ const Rates = () => {
   });
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} data-testid="rates">
       <div className={classes.content}>
         <div className={classes.heading}>Currency Conversion</div>
 
@@ -86,8 +86,7 @@ const Rates = () => {
             <div className={classes.transferIcon}>
               <Transfer height={'25px'} />
             </div>
-
-            <div className={classes.rate}>{exchangeRate}</div>
+            <div className={classes.rate} data-testid={'exchange-rate'}>{exchangeRate}</div>
           </div>
 
           <div>
@@ -116,12 +115,13 @@ const Rates = () => {
           </div>
 
           <div className={classes.rowWrapper}>
-              <RateStack 
+              <RateStack
+                dataTestId={'paytron-rate'}
                 label={'Markup included'}
-                style={{ marginRight: '20px' }}
                 value={getConversion(true)}
               />
-              <RateStack 
+              <RateStack
+                dataTestId={'true-rate'}
                 label={'Markup excluded'}
                 value={getConversion(false)}
               />
