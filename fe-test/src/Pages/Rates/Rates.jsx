@@ -114,13 +114,15 @@ const Rates = () => {
             />
           </div>
 
-          <div className={classes.rowWrapper}>
+          <div className={classes.columnWrapper}>
               <RateStack
+                currency={countryToCurrency[toCurrency]}
                 dataTestId={'paytron-rate'}
                 label={'Markup included'}
                 value={getConversion(true)}
               />
               <RateStack
+                currency={countryToCurrency[toCurrency]}
                 dataTestId={'true-rate'}
                 label={'Markup excluded'}
                 value={getConversion(false)}
